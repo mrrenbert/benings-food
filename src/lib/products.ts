@@ -1,0 +1,10 @@
+import productPhoto from '@/assets/foto_produk.jpg.asset.json';
+
+export const products = [
+  { id: 'signature-hojicha', name: 'Signature Hojicha', subtitle: 'Warm, nutty & beautifully balanced', price: 18, weight: '50g', image: productPhoto.url, tag: 'Bestseller', type: 'Roasted green tea', origin: 'Kyoto, Japan', notes: 'Toasted hazelnut · Caramel · Cedar', description: 'A comforting classic, thoughtfully roasted to reveal a rich amber infusion. Smooth, gently sweet, and wonderfully grounding — a little moment of calm, any time of day.' },
+  { id: 'roasted-kukicha', name: 'Roasted Kukicha', subtitle: 'Light, mellow & naturally sweet', price: 16, weight: '50g', image: productPhoto.url, tag: 'Low caffeine', type: 'Roasted twig tea', origin: 'Shizuoka, Japan', notes: 'Toasted wood · Honey · Almond', description: 'Carefully selected tea stems, slowly roasted for a gentle, rounded cup. Naturally light in caffeine, with a soft sweetness that makes everyday rituals feel special.' },
+  { id: 'genmaicha-blend', name: 'Genmaicha Blend', subtitle: 'Toasty rice meets delicate green tea', price: 20, weight: '50g', image: productPhoto.url, tag: '', type: 'Green tea & roasted rice', origin: 'Uji, Japan', notes: 'Puffed rice · Fresh grass · Chestnut', description: 'Delicate green tea and fragrant roasted rice come together in a wonderfully balanced blend. A golden cup with a toasted aroma and a fresh, clean finish.' },
+  { id: 'roasted-oolong', name: 'Roasted Oolong', subtitle: 'Deep, aromatic & quietly complex', price: 24, weight: '50g', image: productPhoto.url, tag: 'Small batch', type: 'Roasted oolong tea', origin: 'Nantou, Taiwan', notes: 'Dark chocolate · Stone fruit · Walnut', description: 'A slow-roasted oolong with beautiful depth. Its layered fragrance unfolds with every infusion, from warm walnut to a lingering hint of ripe stone fruit.' },
+];
+export type Product = (typeof products)[number];
+export const money = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
