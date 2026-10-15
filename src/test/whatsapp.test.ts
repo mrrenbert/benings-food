@@ -14,16 +14,23 @@ describe('WhatsApp checkout and order helpers', () => {
   });
 
   it('formats order message dynamically based on cart items', () => {
+    const firstProduct = products[0];
+    const secondProduct = products[1];
+
+    if (!firstProduct || !secondProduct) {
+      throw new Error('Test products not found');
+    }
+
     const items = [
-      { product: products[0], quantity: 2 },
-      { product: products[1], quantity: 1 },
+      { product: firstProduct, quantity: 2 },
+      { product: secondProduct, quantity: 1 },
     ];
-    const total = products[0].price * 2 + products[1].price * 1;
+    const total = firstProduct.price * 2 + secondProduct.price * 1;
     const message = formatWhatsAppOrderMessage(items, total);
 
     expect(message).toContain('Halo Benings Food, saya ingin konfirmasi pesanan dari website:');
-    expect(message).toContain(`- ${products[0].name} (x2)`);
-    expect(message).toContain(`- ${products[1].name} (x1)`);
+    expect(message).toContain(`- ${firstProduct.name} (x2)`);
+    expect(message).toContain(`- ${secondProduct.name} (x1)`);
     expect(message).toContain('Total:');
     expect(message).toContain('Nama:');
     expect(message).toContain('Alamat:');
@@ -32,8 +39,13 @@ describe('WhatsApp checkout and order helpers', () => {
   });
 
   it('generates wa.me URL with phone number and encoded message', () => {
-    const items = [{ product: products[0], quantity: 1 }];
-    const url = getWhatsAppCartUrl(items, products[0].price);
+    const product = products[0];
+    if (!product) {
+      throw new Error('Test product not found');
+    }
+
+    const items = [{ product, quantity: 1 }];
+    const url = getWhatsAppCartUrl(items, product.price);
 
     expect(url).toContain('https://wa.me/6285119297858?text=');
     expect(decodeURIComponent(url)).toContain('Halo Benings Food, saya ingin konfirmasi pesanan dari website:');
